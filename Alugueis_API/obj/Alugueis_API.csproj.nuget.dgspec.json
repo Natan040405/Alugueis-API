@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Faculdade\\Projeto-Alugueis\\Alugueis_API\\Alugueis_API\\Alugueis_API.csproj": {}
+    "C:\\Users\\natan\\WorkSpaceProgram\\Imobilith\\alugueis_api\\Alugueis_API\\alugueis_api.csproj": {}
   },
   "projects": {
-    "C:\\Faculdade\\Projeto-Alugueis\\Alugueis_API\\Alugueis_API\\Alugueis_API.csproj": {
+    "C:\\Users\\natan\\WorkSpaceProgram\\Imobilith\\alugueis_api\\Alugueis_API\\alugueis_api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Faculdade\\Projeto-Alugueis\\Alugueis_API\\Alugueis_API\\Alugueis_API.csproj",
-        "projectName": "Alugueis_API",
-        "projectPath": "C:\\Faculdade\\Projeto-Alugueis\\Alugueis_API\\Alugueis_API\\Alugueis_API.csproj",
-        "packagesPath": "C:\\Users\\natan.valente\\.nuget\\packages\\",
-        "outputPath": "C:\\Faculdade\\Projeto-Alugueis\\Alugueis_API\\Alugueis_API\\obj\\",
+        "projectUniqueName": "C:\\Users\\natan\\WorkSpaceProgram\\Imobilith\\alugueis_api\\Alugueis_API\\alugueis_api.csproj",
+        "projectName": "alugueis_api",
+        "projectPath": "C:\\Users\\natan\\WorkSpaceProgram\\Imobilith\\alugueis_api\\Alugueis_API\\alugueis_api.csproj",
+        "packagesPath": "C:\\Users\\natan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\natan\\WorkSpaceProgram\\Imobilith\\alugueis_api\\Alugueis_API\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\natan.valente\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\natan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,8 +22,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nexus.movtech.com.br/repository/nuget-group/index.json": {}
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
@@ -44,8 +40,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -89,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

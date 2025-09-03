@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Alugueis_API.Models
+namespace alugueis_api.Models
 {
     public class Locatario
     {

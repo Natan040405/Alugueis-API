@@ -1,7 +1,7 @@
-﻿using Alugueis_API.Models;
+﻿using alugueis_api.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Alugueis_API.Data
+namespace alugueis_api.Data
 {
     public class AppDbContext : DbContext
     {

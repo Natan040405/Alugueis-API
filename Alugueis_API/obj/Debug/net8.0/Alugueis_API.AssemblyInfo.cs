@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("Alugueis_API")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("alugueis_api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("Alugueis_API")]
-[assembly: System.Reflection.AssemblyTitleAttribute("Alugueis_API")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7c3859fa17417b71741508d7c1709894ba4eb3e8")]
+[assembly: System.Reflection.AssemblyProductAttribute("alugueis_api")]
+[assembly: System.Reflection.AssemblyTitleAttribute("alugueis_api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Gerado pela classe WriteCodeFragment do MSBuild.
