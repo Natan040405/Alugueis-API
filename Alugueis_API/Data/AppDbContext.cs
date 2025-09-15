@@ -1,7 +1,7 @@
-﻿using Alugueis_API.Models;
+﻿using alugueis_api.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Alugueis_API.Data
+namespace alugueis_api.Data
 {
     public class AppDbContext : DbContext
     {
@@ -64,6 +64,9 @@ namespace Alugueis_API.Data
                 .HasOne(dr => dr.Apto)
                 .WithMany(a => a.DespesasRateio)
                 .HasForeignKey(dr => dr.CodApto);
+
+            modelBuilder.Entity<DespesaRateio>()
+                .HasKey(dr => new { dr.CodDespesa, dr.CodApto });
         }
     }
 }

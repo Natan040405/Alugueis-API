@@ -1,12 +1,12 @@
-﻿using Alugueis_API.Data;
-using Alugueis_API.Models;
+﻿using alugueis_api.Data;
+using alugueis_api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 
-namespace Alugueis_API.Controllers
+namespace alugueis_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -20,7 +20,7 @@ namespace Alugueis_API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddLocatario(Locatario locatario)
+        public async Task<IActionResult> AddLocatario([FromBody] Locatario locatario)
         {
             _AppDbContext.Locatarios.Add(locatario);
             await _AppDbContext.SaveChangesAsync();
@@ -32,26 +32,26 @@ namespace Alugueis_API.Controllers
             List<Locatario> locatarios = await _AppDbContext.Locatarios.ToListAsync();
             return Ok(locatarios);
         }
-        [HttpGet("{codLocatario}")]
-        public async Task<ActionResult<Locatario>> GetLocatarioById(int codLocatario)
+        [HttpGet("{cpf}")]
+        public async Task<ActionResult<Locatario>> GetLocatarioById(string cpf)
         {
-            Locatario locatario = await _AppDbContext.Locatarios.FindAsync(codLocatario);
+            Locatario locatario = await _AppDbContext.Locatarios.FindAsync(cpf);
             if (locatario == null) return NotFound();
             return Ok(locatario);
         }
-        [HttpPut("{codLocatario}")]
-        public async Task<IActionResult>UpdateLocatario(int codLocatario, [FromBody] Locatario locatarioAtualizado)
+        [HttpPut("{cpf}")]
+        public async Task<IActionResult>UpdateLocatario(string cpf, [FromBody] Locatario locatarioAtualizado)
         {
-            Locatario locatarioAtual = await _AppDbContext.Locatarios.FindAsync(codLocatario);
+            Locatario locatarioAtual = await _AppDbContext.Locatarios.FindAsync(cpf);
             if (locatarioAtual == null) return NotFound();
             _AppDbContext.Entry(locatarioAtual).CurrentValues.SetValues(locatarioAtualizado);
             await _AppDbContext.SaveChangesAsync();
             return Ok(locatarioAtual);
         }
-        [HttpDelete("{codLocatario}")]
-        public async Task<IActionResult> DeleteLocatario(int codLocatario)
+        [HttpDelete("{cpf}")]
+        public async Task<IActionResult> DeleteLocatario(string cpf)
         {
-            Locatario locatario = await _AppDbContext.Locatarios.FindAsync(codLocatario);
+            Locatario locatario = await _AppDbContext.Locatarios.FindAsync(cpf);
             if (locatario == null) return NotFound();
             _AppDbContext.Locatarios.Remove(locatario);
             await _AppDbContext.SaveChangesAsync();

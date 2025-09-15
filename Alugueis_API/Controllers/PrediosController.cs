@@ -1,10 +1,10 @@
-﻿using Alugueis_API.Data;
-using Alugueis_API.Models;
+﻿using alugueis_api.Data;
+using alugueis_api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace Alugueis_API.Controllers
+namespace alugueis_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -36,6 +36,24 @@ namespace Alugueis_API.Controllers
             Predio predio = await _AppDbContext.Predios.FindAsync(codPredio);
             if(predio == null) return NotFound();
             return Ok(predio);
+        }
+        [HttpPut("{codPredio}")]
+        public async Task<ActionResult<Predio>> UpdatePredio(int codPredio, [FromBody]Predio codPredioAtualizado)
+        {
+            Predio predioAtual = await _AppDbContext.Predios.FindAsync(codPredio);
+            if(predioAtual == null) return NotFound();
+            _AppDbContext.Entry(predioAtual).CurrentValues.SetValues(codPredioAtualizado);
+            await _AppDbContext.SaveChangesAsync();
+            return Ok(predioAtual);
+        }
+        [HttpDelete("{codPredio}")]
+        public async Task<IActionResult> DeletePredio(int codPredio)
+        {
+            Predio predio = await _AppDbContext.Predios.FindAsync(codPredio);
+            if (predio == null) return NotFound();
+            _AppDbContext.Predios.Remove(predio);
+            await _AppDbContext.SaveChangesAsync();
+            return NoContent();
         }
     }
 }

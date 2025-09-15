@@ -1,9 +1,18 @@
+using Alugueis_API.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+//  pega a string de conexão do appsettings.json
+var connectionString = builder.Configuration.GetConnectionString("AppDbConnectionString");
+
+//  registra o DbContext no DI
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
