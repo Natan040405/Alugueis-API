@@ -1,4 +1,4 @@
-using Alugueis_API.Data;
+using alugueis_api.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

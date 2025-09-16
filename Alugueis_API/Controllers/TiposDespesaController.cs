@@ -1,5 +1,5 @@
-﻿using Alugueis_API.Data;
-using Alugueis_API.Models;
+﻿using alugueis_api.Data;
+using alugueis_api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
