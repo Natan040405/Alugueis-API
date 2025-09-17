@@ -36,10 +36,10 @@ namespace Alugueis_API.Controllers
             if (tipoDespesa == null) return NotFound();
             return Ok(tipoDespesa);
         }
-        [HttpPut("{codTipoDespesa}")]
-        public async Task<IActionResult> UpdateTipoDespesa(int codTipoDespesa, [FromBody]TipoDespesa tipoDespesaAtualizado)
+        [HttpPut]
+        public async Task<IActionResult> UpdateTipoDespesa([FromBody]TipoDespesa tipoDespesaAtualizado)
         {
-            TipoDespesa tipoDespesaAtual = await _AppDbContext.TiposDespesa.FindAsync(codTipoDespesa);
+            TipoDespesa tipoDespesaAtual = await _AppDbContext.TiposDespesa.FindAsync(tipoDespesaAtualizado.CodTipo);
             if(tipoDespesaAtual == null) return NotFound();
             _AppDbContext.Entry(tipoDespesaAtual).CurrentValues.SetValues(tipoDespesaAtualizado);
             return Ok(tipoDespesaAtualizado);

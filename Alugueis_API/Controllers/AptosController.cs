@@ -39,10 +39,10 @@ namespace alugueis_api.Controllers
             if (apto == null) return NotFound();
             return Ok(apto);
         }
-        [HttpPut("{codApto}")]
-        public async Task<IActionResult>UpdateApto(int codApto, [FromBody] Apto aptoAtualizado)
+        [HttpPut]
+        public async Task<IActionResult>UpdateApto([FromBody] Apto aptoAtualizado)
         {
-            Apto aptoAtual = await _AppDbContext.Aptos.FindAsync(codApto);
+            Apto aptoAtual = await _AppDbContext.Aptos.FindAsync(aptoAtualizado.CodApto);
             if(aptoAtual == null) return NotFound();
             _AppDbContext.Entry(aptoAtual).CurrentValues.SetValues(aptoAtualizado);
             await _AppDbContext.SaveChangesAsync();

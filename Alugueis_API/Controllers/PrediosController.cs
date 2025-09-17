@@ -37,10 +37,10 @@ namespace alugueis_api.Controllers
             if(predio == null) return NotFound();
             return Ok(predio);
         }
-        [HttpPut("{codPredio}")]
-        public async Task<ActionResult<Predio>> UpdatePredio(int codPredio, [FromBody]Predio codPredioAtualizado)
+        [HttpPut]
+        public async Task<ActionResult<Predio>> UpdatePredio([FromBody]Predio codPredioAtualizado)
         {
-            Predio predioAtual = await _AppDbContext.Predios.FindAsync(codPredio);
+            Predio predioAtual = await _AppDbContext.Predios.FindAsync(codPredioAtualizado.CodPredio);
             if(predioAtual == null) return NotFound();
             _AppDbContext.Entry(predioAtual).CurrentValues.SetValues(codPredioAtualizado);
             await _AppDbContext.SaveChangesAsync();

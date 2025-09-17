@@ -39,10 +39,10 @@ namespace alugueis_api.Controllers
             if (locatario == null) return NotFound();
             return Ok(locatario);
         }
-        [HttpPut("{cpf}")]
-        public async Task<IActionResult>UpdateLocatario(string cpf, [FromBody] Locatario locatarioAtualizado)
+        [HttpPut]
+        public async Task<IActionResult>UpdateLocatario([FromBody] Locatario locatarioAtualizado)
         {
-            Locatario locatarioAtual = await _AppDbContext.Locatarios.FindAsync(cpf);
+            Locatario locatarioAtual = await _AppDbContext.Locatarios.FindAsync(locatarioAtualizado.Cpf);
             if (locatarioAtual == null) return NotFound();
             _AppDbContext.Entry(locatarioAtual).CurrentValues.SetValues(locatarioAtualizado);
             await _AppDbContext.SaveChangesAsync();
