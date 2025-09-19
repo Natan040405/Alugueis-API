@@ -38,7 +38,7 @@ namespace alugueis_api.Controllers
             return Ok(predio);
         }
         [HttpPut]
-        public async Task<ActionResult<Predio>> UpdatePredio([FromBody]Predio codPredioAtualizado)
+        public async Task<ActionResult<Predio>> UpdatePredio([FromBody] Predio codPredioAtualizado)
         {
             Predio predioAtual = await _AppDbContext.Predios.FindAsync(codPredioAtualizado.CodPredio);
             if(predioAtual == null) return NotFound();
