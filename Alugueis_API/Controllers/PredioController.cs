@@ -8,11 +8,11 @@ namespace alugueis_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PrediosController : ControllerBase
+    public class PredioController : ControllerBase
     {
         private readonly AppDbContext _AppDbContext;
 
-        public PrediosController(AppDbContext appDbContext)
+        public PredioController(AppDbContext appDbContext)
         {
             _AppDbContext = appDbContext;
         }

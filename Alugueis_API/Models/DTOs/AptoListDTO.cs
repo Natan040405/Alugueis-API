@@ -1,15 +1,13 @@
-﻿namespace alugueis_api.Models
+﻿namespace alugueis_api.Models.DTOs
 {
-    public class Apto
+    public class AptoListDTO
     {
         public int CodApto { get; set; }
         public int CodPredio { get; set; }
-        public Predio Predio { get; set; }
         public int Andar { get; set; }
         public int QtdQuartos { get; set; }
         public int QtdBanheiros { get; set; }
         public int MetrosQuadrados { get; set; }
-        public ICollection<Locacao> Locacoes { get; set; }
-        public ICollection<DespesaRateio> DespesasRateio { get; set; }
+        public string NomePredio { get; set; }
     }
 }

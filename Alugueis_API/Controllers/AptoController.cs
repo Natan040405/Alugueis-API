@@ -1,5 +1,6 @@
 ﻿using alugueis_api.Data;
 using alugueis_api.Models;
+using alugueis_api.Models.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,13 +9,13 @@ namespace alugueis_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AptosController : ControllerBase
+    public class AptoController : ControllerBase
     {
         //Cria objeto de referencia ao banco de dados
         private readonly AppDbContext _AppDbContext;
 
         //Constructor da classe gerando o banco no objeto de referencia
-        public AptosController(AppDbContext appDbContext)
+        public AptoController(AppDbContext appDbContext)
         {
             _AppDbContext = appDbContext;
         }
@@ -24,12 +25,38 @@ namespace alugueis_api.Controllers
         {
             _AppDbContext.Aptos.Add(apto);
             await _AppDbContext.SaveChangesAsync();
-            return Ok();
+            AptoListDTO aptoDTO = await _AppDbContext.Aptos
+                .Include(a => a.Predio)
+                .Where(a => a.CodApto == apto.CodApto)
+                .Select(a => new AptoListDTO
+                {
+                    CodApto = a.CodApto,
+                    CodPredio = a.CodPredio,
+                    NomePredio = a.Predio.NomePredio,
+                    Andar = a.Andar,
+                    QtdQuartos = a.QtdQuartos,
+                    QtdBanheiros = a.QtdBanheiros,
+                    MetrosQuadrados = a.MetrosQuadrados,
+                })
+                .FirstOrDefaultAsync();
+            return Ok(aptoDTO);
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Apto>>> GetAptos()
+        public async Task<ActionResult<IEnumerable<AptoListDTO>>> GetAptos()
         {
-            List<Apto> aptos = await _AppDbContext.Aptos.ToListAsync();
+            List<AptoListDTO> aptos = await _AppDbContext.Aptos
+                .Include(a => a.Predio)
+                .Select( a => new AptoListDTO
+                {
+                    CodApto = a.CodApto,
+                    CodPredio = a.CodPredio,
+                    NomePredio = a.Predio.NomePredio,
+                    Andar = a.Andar,
+                    QtdQuartos = a.QtdQuartos,
+                    QtdBanheiros = a.QtdBanheiros,
+                    MetrosQuadrados = a.MetrosQuadrados,
+                })
+                .ToListAsync();
             return Ok(aptos);
         }
         [HttpGet("{codApto}")]

@@ -24,6 +24,10 @@ namespace alugueis_api.Data
                 .HasKey(a => a.CodApto);
 
             modelBuilder.Entity<Apto>()
+                .Property(a => a.CodApto)
+                .ValueGeneratedNever();
+
+            modelBuilder.Entity<Apto>()
                 .HasOne(a => a.Predio)
                 .WithMany(p => p.Aptos)
                 .HasForeignKey(a => a.CodPredio);

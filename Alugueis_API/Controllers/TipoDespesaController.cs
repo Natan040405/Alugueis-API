@@ -8,11 +8,11 @@ namespace Alugueis_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TiposDespesaController : ControllerBase
+    public class TipoDespesaController : ControllerBase
     {
         private readonly AppDbContext _AppDbContext;
 
-        public TiposDespesaController(AppDbContext appDbContext)
+        public TipoDespesaController(AppDbContext appDbContext)
         {
             _AppDbContext = appDbContext;
         }

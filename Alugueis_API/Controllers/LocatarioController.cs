@@ -10,11 +10,11 @@ namespace alugueis_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LocatariosController : ControllerBase
+    public class LocatarioController : ControllerBase
     {
         private readonly AppDbContext _AppDbContext;
 
-        public LocatariosController(AppDbContext appDbContext)
+        public LocatarioController(AppDbContext appDbContext)
         {
             _AppDbContext = appDbContext;
         }
