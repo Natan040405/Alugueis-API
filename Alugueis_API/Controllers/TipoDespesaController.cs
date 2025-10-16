@@ -21,7 +21,7 @@ namespace Alugueis_API.Controllers
         {
             _AppDbContext.TiposDespesa.Add(tipoDespesa);
             await _AppDbContext.SaveChangesAsync();
-            return Ok();
+            return Ok(tipoDespesa);
         }
         [HttpGet]
         public async Task<ActionResult<ICollection<TipoDespesa>>> GetTiposDespesa()
@@ -42,6 +42,7 @@ namespace Alugueis_API.Controllers
             TipoDespesa tipoDespesaAtual = await _AppDbContext.TiposDespesa.FindAsync(tipoDespesaAtualizado.CodTipo);
             if(tipoDespesaAtual == null) return NotFound();
             _AppDbContext.Entry(tipoDespesaAtual).CurrentValues.SetValues(tipoDespesaAtualizado);
+            await _AppDbContext.SaveChangesAsync();
             return Ok(tipoDespesaAtualizado);
         }
         [HttpDelete("{codTipoDespesa}")]
