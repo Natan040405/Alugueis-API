@@ -54,5 +54,14 @@ namespace Alugueis_API.Controllers
             await _AppDbContext.SaveChangesAsync();
             return NoContent();
         }
+
+
+
+        private async Task<TipoDespesa> GetTipoById(int codTipoDespesa)
+        {
+            TipoDespesa tipoDespesa = await _AppDbContext.TiposDespesa.FindAsync(codTipoDespesa);
+            return tipoDespesa;
+        }
+
     }
 }
