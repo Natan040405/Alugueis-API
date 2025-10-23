@@ -9,10 +9,10 @@ using alugueis_api.Data;
 
 #nullable disable
 
-namespace Alugueis_API.Migrations
+namespace alugueis_api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250923221300_InitialCreate")]
+    [Migration("20251009001610_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

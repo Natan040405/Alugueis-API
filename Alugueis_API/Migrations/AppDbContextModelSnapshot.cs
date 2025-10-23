@@ -8,7 +8,7 @@ using alugueis_api.Data;
 
 #nullable disable
 
-namespace Alugueis_API.Migrations
+namespace alugueis_api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot

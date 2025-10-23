@@ -1,0 +1,75 @@
+Estrutura principal (mantida e simplificada)
+
+Models existentes:
+
+TipoDespesa
+
+    codTipoDespesa
+
+    nomeTipoDespesa
+
+    compartilhado (sim/não)
+
+    possuiCalculoCustomizado (opcional, apenas indicativo)
+
+Despesa
+
+    codDespesa
+
+    codTipoDespesa
+
+    vlrTotalDespesa
+
+    dataDespesa
+
+    competenciaMes (ex: “2025-10”, para organizar por mês de referência)
+
+RateiosDespesa
+
+    codDespesa
+
+    codApto
+
+    vlrRateio
+
+Novos models genéricos:
+
+FundoReserva
+
+    codFundo
+
+    descricao
+
+    metaValor
+
+    prazoMeses
+
+    dataInicio
+
+    valorMensal (metaValor ÷ prazoMeses)
+
+    ativo
+
+- O sistema gera automaticamente uma despesa mensal compartilhada enquanto o fundo estiver ativo.
+
+O que não será implementado agora
+
+- Nenhuma lógica de cálculo automático de despesas (como gás, luz por medição, etc.).
+
+- Esses casos serão tratados como customizações pagas sob demanda.
+
+Estratégia de produto
+
+- O sistema será entregue com funcionalidades genéricas e estáveis.
+
+- Clientes com regras de cálculo específicas poderão solicitar extensões personalizadas.
+
+- Campo possuiCalculoCustomizado serve apenas para indicar essa possibilidade.
+
+Decisão de vencimento e fechamento
+
+- Fechamento fixo dia 10 de cada mês.
+
+- Sem controle de vencimento por despesa.
+
+- Cada despesa pertence a uma competência mensal (competenciaMes) e entra no fechamento correspondente.

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Alugueis_API.Migrations
+namespace alugueis_api.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
