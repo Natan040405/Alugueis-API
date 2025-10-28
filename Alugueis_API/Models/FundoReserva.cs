@@ -7,7 +7,7 @@
         public float ValoreMeta { get; set; }
         public int PrazoMeses { get; set; }
         public DateTime dataInicio { get; set; }
-        public float ValorMensal { get => ValoreMeta / PrazoMeses; set; }
+        public float ValorMensal {get => ValoreMeta / PrazoMeses;}
         public int ativo { get; set; }
     }
 }
