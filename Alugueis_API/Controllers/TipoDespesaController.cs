@@ -39,7 +39,7 @@ namespace Alugueis_API.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateTipoDespesa([FromBody]TipoDespesa tipoDespesaAtualizado)
         {
-            TipoDespesa tipoDespesaAtual = await _AppDbContext.TiposDespesa.FindAsync(tipoDespesaAtualizado.CodTipo);
+            TipoDespesa tipoDespesaAtual = await _AppDbContext.TiposDespesa.FindAsync(tipoDespesaAtualizado.CodTipoDespesa);
             if(tipoDespesaAtual == null) return NotFound();
             _AppDbContext.Entry(tipoDespesaAtual).CurrentValues.SetValues(tipoDespesaAtualizado);
             await _AppDbContext.SaveChangesAsync();

@@ -49,7 +49,7 @@ namespace alugueis_api.Data
                 .HasForeignKey(l => l.CodApto);
 
             modelBuilder.Entity<TipoDespesa>()
-                .HasKey(t => t.CodTipo);
+                .HasKey(t => t.CodTipoDespesa);
 
             modelBuilder.Entity<Despesa>()
                 .HasKey(d => d.CodDespesa);

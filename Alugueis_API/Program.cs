@@ -1,9 +1,11 @@
 using alugueis_api.Data;
+using alugueis_api.Handlers;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<AddDespesaAptoHandler>();
 builder.Services.AddControllers();
 
 //  pega a string de conexão do appsettings.json

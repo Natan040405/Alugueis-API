@@ -14,34 +14,48 @@ namespace alugueis_api.Handlers
             _AppDbContext = appDbContext;
         }
 
-        public async Task<IActionResult> Handle(AddDespesaAptoDTO dto) 
+        public async Task<IActionResult> Handle(DespesaAptoDTO dto) 
         {
             Despesa despesa = AddDespesa(dto);
-            await RateiaDespesa(dto);
             await _AppDbContext.SaveChangesAsync();
-            return new OkObjectResult("Despesa Cadastrada com Sucesso");
+            await RateiaDespesa(despesa, dto.CodApto);
+            await _AppDbContext.SaveChangesAsync();
+            return new OkObjectResult(despesa);
         }
 
-        private Despesa AddDespesa(AddDespesaAptoDTO dto)
+        private Despesa AddDespesa(DespesaAptoDTO dto)
         {
             Despesa despesa = new Despesa();
             despesa.CodDespesa = dto.CodDespesa;
             despesa.CodTipoDespesa = dto.CodTipoDespesa;
             despesa.VrlTotalDespesa = dto.VlrTotalDespesa;
-            despesa.DataDespesa = dto.DataDespesa;
+            despesa.DataDespesa = DateTime.Now;
             despesa.CompetenciaMes = dto.CompetenciaMes;
             _AppDbContext.Despesas.Add(despesa);
             return despesa;
         }
 
-        public async Task RateiaDespesa(AddDespesaAptoDTO dto)
+        public async Task RateiaDespesa(Despesa despesa, int? codApto = 0)
         {
             List<Apto> aptos = new List<Apto>();
 
-            if (dto.Compartilhado == 1)
+            if(codApto == 0)
             {
                 aptos = await GetAptos();
             }
+            else
+            {
+                aptos.Add(await GetAptoById(codApto));
+            }
+
+                foreach (Apto apto in aptos)
+                {
+                    DespesaRateio despesaRateio = new DespesaRateio();
+                    despesaRateio.CodApto = apto.CodApto;
+                    despesaRateio.CodDespesa = despesa.CodDespesa;
+                    despesaRateio.VlrRateio = despesa.VrlTotalDespesa / aptos.Count;
+                    _AppDbContext.DespesaRateios.Add(despesaRateio);
+                }
 
         }
 
@@ -56,6 +70,21 @@ namespace alugueis_api.Handlers
         {
             Apto apto = await _AppDbContext.Aptos.FindAsync(codApto);
             return apto;
+        }
+
+        public async Task<ActionResult<List<DespesaAptoDTO>>> GetDespesas()
+        {
+            List<DespesaAptoDTO> despesas = await _AppDbContext.Despesas
+                .Include(d => d.TipoDespesa)
+                .Select(d => new DespesaAptoDTO
+                {
+                    CodDespesa = d.CodDespesa,
+                    CodTipoDespesa = d.CodTipoDespesa,
+                    VlrTotalDespesa = d.VrlTotalDespesa,
+                    CompetenciaMes = d.CompetenciaMes,
+                    Compartilhado = d.TipoDespesa.Compartilhado,
+                }).ToListAsync();
+            return new OkObjectResult(despesas);
         }
     }
 }
