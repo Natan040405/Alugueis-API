@@ -1,6 +1,6 @@
 ﻿namespace alugueis_api.Models.DTOs
 {
-    public class AptoListDTO
+    public class GetAptoDTO
     {
         public int CodApto { get; set; }
         public int CodPredio { get; set; }

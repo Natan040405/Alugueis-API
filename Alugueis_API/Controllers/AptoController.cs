@@ -25,10 +25,10 @@ namespace alugueis_api.Controllers
         {
             _AppDbContext.Aptos.Add(apto);
             await _AppDbContext.SaveChangesAsync();
-            AptoListDTO aptoDTO = await _AppDbContext.Aptos
+            GetAptoDTO aptoDTO = await _AppDbContext.Aptos
                 .Include(a => a.Predio)
                 .Where(a => a.CodApto == apto.CodApto)
-                .Select(a => new AptoListDTO
+                .Select(a => new GetAptoDTO
                 {
                     CodApto = a.CodApto,
                     CodPredio = a.CodPredio,
@@ -42,11 +42,11 @@ namespace alugueis_api.Controllers
             return Ok(aptoDTO);
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AptoListDTO>>> GetAptos()
+        public async Task<ActionResult<IEnumerable<GetAptoDTO>>> GetAptos()
         {
-            List<AptoListDTO> aptos = await _AppDbContext.Aptos
+            List<GetAptoDTO> aptos = await _AppDbContext.Aptos
                 .Include(a => a.Predio)
-                .Select( a => new AptoListDTO
+                .Select( a => new GetAptoDTO
                 {
                     CodApto = a.CodApto,
                     CodPredio = a.CodPredio,

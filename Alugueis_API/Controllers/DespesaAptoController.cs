@@ -22,13 +22,13 @@ namespace alugueis_api.Controllers
         }
 
         [HttpPost]
-        public Task<IActionResult> AddDespesaApto([FromBody] DespesaAptoDTO dto)
+        public Task<IActionResult> AddDespesaApto([FromBody] AddDespesaAptoDTO dto)
         {
             return _AddDespesaAptoHandler.Handle(dto);
         }
 
         [HttpGet]
-        public Task<ActionResult<List<DespesaAptoDTO>>> GetDespesas()
+        public Task<ActionResult<List<GetDespesaAptoDTO>>> GetDespesas()
         {
             return _AddDespesaAptoHandler.GetDespesas();
         }

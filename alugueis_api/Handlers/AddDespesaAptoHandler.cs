@@ -14,16 +14,25 @@ namespace alugueis_api.Handlers
             _AppDbContext = appDbContext;
         }
 
-        public async Task<IActionResult> Handle(DespesaAptoDTO dto) 
+        public async Task<IActionResult> Handle(AddDespesaAptoDTO dto) 
         {
             Despesa despesa = AddDespesa(dto);
             await _AppDbContext.SaveChangesAsync();
             await RateiaDespesa(despesa, dto.CodApto);
             await _AppDbContext.SaveChangesAsync();
-            return new OkObjectResult(despesa);
+            GetDespesaAptoDTO getDespesaAptoDTO = new GetDespesaAptoDTO(
+                despesa.CodDespesa,
+                despesa.CodTipoDespesa,
+                despesa.TipoDespesa.NomeTipoDespesa,
+                despesa.VrlTotalDespesa,
+                despesa.DataDespesa,
+                despesa.CompetenciaMes,
+                despesa.TipoDespesa.Compartilhado
+                );
+            return new OkObjectResult(getDespesaAptoDTO);
         }
 
-        private Despesa AddDespesa(DespesaAptoDTO dto)
+        private Despesa AddDespesa(AddDespesaAptoDTO dto)
         {
             Despesa despesa = new Despesa();
             despesa.CodDespesa = dto.CodDespesa;
@@ -72,18 +81,19 @@ namespace alugueis_api.Handlers
             return apto;
         }
 
-        public async Task<ActionResult<List<DespesaAptoDTO>>> GetDespesas()
+        public async Task<ActionResult<List<GetDespesaAptoDTO>>> GetDespesas()
         {
-            List<DespesaAptoDTO> despesas = await _AppDbContext.Despesas
+            List<GetDespesaAptoDTO> despesas = await _AppDbContext.Despesas
                 .Include(d => d.TipoDespesa)
-                .Select(d => new DespesaAptoDTO
-                {
-                    CodDespesa = d.CodDespesa,
-                    CodTipoDespesa = d.CodTipoDespesa,
-                    VlrTotalDespesa = d.VrlTotalDespesa,
-                    CompetenciaMes = d.CompetenciaMes,
-                    Compartilhado = d.TipoDespesa.Compartilhado,
-                }).ToListAsync();
+                .Select(d => new GetDespesaAptoDTO(
+                    d.CodDespesa,
+                    d.CodTipoDespesa,
+                    d.TipoDespesa.NomeTipoDespesa,
+                    d.VrlTotalDespesa,
+                    d.DataDespesa,
+                    d.CompetenciaMes,
+                    d.TipoDespesa.Compartilhado
+                )).ToListAsync();
             return new OkObjectResult(despesas);
         }
     }
