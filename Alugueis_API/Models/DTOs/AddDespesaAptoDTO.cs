@@ -7,6 +7,5 @@
         public int CodTipoDespesa { get; set; }
         public float VlrTotalDespesa { get; set; }
         public DateTime CompetenciaMes { get; set; }
-        public int Compartilhado { get; set; }
     }
 }
