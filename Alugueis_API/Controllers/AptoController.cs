@@ -13,7 +13,7 @@ namespace alugueis_api.Controllers
     {
         //Cria objeto de referencia ao banco de dados
         private readonly AppDbContext _AppDbContext;
-
+         
         //Constructor da classe gerando o banco no objeto de referencia
         public AptoController(AppDbContext appDbContext)
         {

@@ -13,12 +13,18 @@ namespace alugueis_api.Controllers
     public class DespesaAptoController : ControllerBase
     {
         private readonly AddDespesaAptoHandler _AddDespesaAptoHandler;
+        private readonly UpdateDespesaAptoHandler _UpdateDespesaHandler;
+        private readonly DeleteDespesaAptoHandler _DeleteDespesaAptoHandler;
+        private readonly GetDespesaAptoHandler _GetDespesaAptoHandler;
         private readonly AppDbContext _appDbContext;
 
-        public DespesaAptoController(AddDespesaAptoHandler handler, AppDbContext appDbContext)
-        { 
-            _AddDespesaAptoHandler = handler;
+        public DespesaAptoController(AddDespesaAptoHandler addDespesaHandler, UpdateDespesaAptoHandler updateDespesaHandler, DeleteDespesaAptoHandler deleteDespesaAptoHandler,GetDespesaAptoHandler getDespesaAptoHandler , AppDbContext appDbContext)
+        {
+            _AddDespesaAptoHandler = addDespesaHandler;
             _appDbContext = appDbContext;
+            _UpdateDespesaHandler = updateDespesaHandler;
+            _DeleteDespesaAptoHandler = deleteDespesaAptoHandler;
+            _GetDespesaAptoHandler= getDespesaAptoHandler;
         }
 
         [HttpPost]
@@ -30,7 +36,19 @@ namespace alugueis_api.Controllers
         [HttpGet]
         public Task<ActionResult<List<GetDespesaAptoDTO>>> GetDespesas()
         {
-            return _AddDespesaAptoHandler.GetDespesas();
+            return _GetDespesaAptoHandler.Handle();
+        }
+
+        [HttpPut]
+        public Task<IActionResult> UpdateDespesa([FromBody] AddDespesaAptoDTO dto)
+        {
+            return _UpdateDespesaHandler.Handle(dto);
+        }
+
+        [HttpDelete("{codDespesa}")]
+        public Task<IActionResult> DeleteDespesa(int codDespesa)
+        {
+            return _DeleteDespesaAptoHandler.Handle(codDespesa);
         }
     }
 }

@@ -48,12 +48,13 @@ namespace alugueis_api.Handlers
 
         public void RateiaDespesa(Despesa despesa, List<Apto> aptos)
         {
+            float valorRateio = despesa.VrlTotalDespesa / aptos.Count;
             foreach (Apto apto in aptos)
             {
                 DespesaRateio despesaRateio = new DespesaRateio();
                 despesaRateio.CodApto = apto.CodApto;
                 despesaRateio.CodDespesa = despesa.CodDespesa;
-                despesaRateio.VlrRateio = despesa.VrlTotalDespesa / aptos.Count;
+                despesaRateio.VlrRateio = valorRateio;
                 _AppDbContext.DespesaRateios.Add(despesaRateio);
             }
         }
@@ -82,22 +83,6 @@ namespace alugueis_api.Handlers
             return apto;
         }
 
-        private async Task<List<DespesaRateio>> GetDespesaRateios(int codDespesaRateio = 0)
-        {
-            List<DespesaRateio> despesaRateios = new List<DespesaRateio>();
-
-            if (codDespesaRateio == 0)
-            {
-                despesaRateios = await _AppDbContext.DespesaRateios.ToListAsync();
-            }
-            else
-            {
-                despesaRateios.Add(await GetDespesaRateioById(codDespesaRateio));
-            }
-
-            return despesaRateios;
-        }
-
         private async Task<DespesaRateio> GetDespesaRateioById(int codDespesaRateio)
         {
             DespesaRateio tipoDespesa = await _AppDbContext.DespesaRateios.FindAsync(codDespesaRateio);
@@ -110,20 +95,6 @@ namespace alugueis_api.Handlers
             return tipoDespesa;
         }
 
-        public async Task<ActionResult<List<GetDespesaAptoDTO>>> GetDespesas()
-        {
-            List<GetDespesaAptoDTO> despesas = await _AppDbContext.Despesas
-                .Include(d => d.TipoDespesa)
-                .Select(d => new GetDespesaAptoDTO(
-                    d.CodDespesa,
-                    d.CodTipoDespesa,
-                    d.TipoDespesa.NomeTipoDespesa,
-                    d.VrlTotalDespesa,
-                    d.DataDespesa,
-                    d.CompetenciaMes,
-                    d.TipoDespesa.Compartilhado
-                )).ToListAsync();
-            return new OkObjectResult(despesas);
-        }
+
     }
 }

@@ -1,11 +1,16 @@
 using alugueis_api.Data;
 using alugueis_api.Handlers;
+using alugueis_api.NovaPasta;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<AddDespesaAptoHandler>();
+builder.Services.AddScoped<UpdateDespesaAptoHandler>();
+builder.Services.AddScoped <DeleteDespesaAptoHandler>();
+builder.Services.AddScoped<GetDespesaAptoHandler>();
+builder.Services.AddScoped<DespesaRepository>();
 builder.Services.AddControllers();
 
 //  pega a string de conexão do appsettings.json

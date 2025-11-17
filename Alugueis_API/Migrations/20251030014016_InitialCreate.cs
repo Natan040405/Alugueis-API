@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace alugueis_api.Migrations
+namespace Alugueis_API.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -46,14 +46,14 @@ namespace alugueis_api.Migrations
                 name: "TiposDespesa",
                 columns: table => new
                 {
-                    CodTipo = table.Column<int>(type: "int", nullable: false)
+                    CodTipoDespesa = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NomeTipo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NomeTipoDespesa = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Compartilhado = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TiposDespesa", x => x.CodTipo);
+                    table.PrimaryKey("PK_TiposDespesa", x => x.CodTipoDespesa);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,8 +85,9 @@ namespace alugueis_api.Migrations
                     CodDespesa = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CodTipoDespesa = table.Column<int>(type: "int", nullable: false),
-                    VrlTotalDespesa = table.Column<float>(type: "real", nullable: false),
-                    DataDespesa = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    VrlTotalDespesa = table.Column<double>(type: "float", nullable: false),
+                    DataDespesa = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CompetenciaMes = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -95,7 +96,7 @@ namespace alugueis_api.Migrations
                         name: "FK_Despesas_TiposDespesa_CodTipoDespesa",
                         column: x => x.CodTipoDespesa,
                         principalTable: "TiposDespesa",
-                        principalColumn: "CodTipo",
+                        principalColumn: "CodTipoDespesa",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -134,7 +135,7 @@ namespace alugueis_api.Migrations
                 {
                     CodDespesa = table.Column<int>(type: "int", nullable: false),
                     CodApto = table.Column<int>(type: "int", nullable: false),
-                    VlrRateio = table.Column<float>(type: "real", nullable: false)
+                    VlrRateio = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {

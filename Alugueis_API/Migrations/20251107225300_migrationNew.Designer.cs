@@ -9,11 +9,11 @@ using alugueis_api.Data;
 
 #nullable disable
 
-namespace alugueis_api.Migrations
+namespace Alugueis_API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251009001610_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20251107225300_migrationNew")]
+    partial class migrationNew
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,6 +62,9 @@ namespace alugueis_api.Migrations
 
                     b.Property<int>("CodTipoDespesa")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("CompetenciaMes")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataDespesa")
                         .HasColumnType("datetime2");
@@ -178,19 +181,19 @@ namespace alugueis_api.Migrations
 
             modelBuilder.Entity("alugueis_api.Models.TipoDespesa", b =>
                 {
-                    b.Property<int>("CodTipo")
+                    b.Property<int>("CodTipoDespesa")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodTipo"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodTipoDespesa"));
 
                     b.Property<int>("Compartilhado")
                         .HasColumnType("int");
 
-                    b.Property<string>("NomeTipo")
+                    b.Property<string>("NomeTipoDespesa")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CodTipo");
+                    b.HasKey("CodTipoDespesa");
 
                     b.ToTable("TiposDespesa");
                 });
