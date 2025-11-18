@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Alugueis_API.Data
 {
-    public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+    public abstract class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {
         public AppDbContext CreateDbContext(string[] args)
         {
