@@ -19,6 +19,11 @@ namespace alugueis_api.NovaPasta
             Despesa despesa = await _AppDbContext.Despesas.FindAsync(codDespesa);
             return despesa;
         }
+        private async Task<DespesaRateio> GetDespesaRateioById(int codDespesaRateio)
+        {
+            DespesaRateio tipoDespesa = await _AppDbContext.DespesaRateios.FindAsync(codDespesaRateio);
+            return tipoDespesa;
+        }
         public async Task GetDespesaRateios(Despesa despesa)
         {
             await _AppDbContext.Entry(despesa).Collection(d => d.Rateios).LoadAsync();
@@ -60,6 +65,26 @@ namespace alugueis_api.NovaPasta
         public async Task SaveChangesAsync()
         {
             await _AppDbContext.SaveChangesAsync();
+        }
+
+        public void Add(Despesa despesa)
+        {
+            _AppDbContext.Despesas.Add(despesa);
+        }
+
+        public void AddRateio(DespesaRateio despesaRateio)
+        {
+            _AppDbContext.DespesaRateios.Add(despesaRateio);
+        }
+
+        public void Remove(Despesa despesa)
+        {
+            _AppDbContext.Despesas.Remove(despesa);
+        }
+
+        public void RemoveRateio(DespesaRateio despesaRateio)
+        {
+            _AppDbContext.DespesaRateios.Remove(despesaRateio);
         }
     }
 }

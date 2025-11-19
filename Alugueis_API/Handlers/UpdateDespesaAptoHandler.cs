@@ -9,12 +9,10 @@ namespace alugueis_api.Handlers
 {
     public class UpdateDespesaAptoHandler
     {
-        private readonly AppDbContext _AppDbContext;
         private readonly DespesaRepository _DespesaRepository;
 
         public UpdateDespesaAptoHandler(AppDbContext appDbContext, DespesaRepository despesaRepository)
         {
-            _AppDbContext = appDbContext;
             _DespesaRepository = despesaRepository;
         }
 
@@ -24,7 +22,7 @@ namespace alugueis_api.Handlers
             await _DespesaRepository.GetDespesaRateios(despesa);
             await _DespesaRepository.GetTipoDespesaDespesa(despesa);
             UpdateDespesa(despesa, dto);
-            await _AppDbContext.SaveChangesAsync();
+            await _DespesaRepository.SaveChangesAsync();
             GetDespesaAptoDTO getDespesaAptoDTO = new GetDespesaAptoDTO(
                 despesa.CodDespesa,
                 despesa.CodTipoDespesa,

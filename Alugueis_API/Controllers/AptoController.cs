@@ -1,6 +1,8 @@
 ﻿using alugueis_api.Data;
+using alugueis_api.Handlers;
 using alugueis_api.Models;
 using alugueis_api.Models.DTOs;
+using alugueis_api.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,11 +15,13 @@ namespace alugueis_api.Controllers
     {
         //Cria objeto de referencia ao banco de dados
         private readonly AppDbContext _AppDbContext;
+        private readonly RecalculationDespesaRateioHandler _RecalculationDespesaRateioHandler;
          
         //Constructor da classe gerando o banco no objeto de referencia
-        public AptoController(AppDbContext appDbContext)
+        public AptoController(AppDbContext appDbContext, RecalculationDespesaRateioHandler recalculationDespesaRateioHandler)
         {
             _AppDbContext = appDbContext;
+            _RecalculationDespesaRateioHandler = recalculationDespesaRateioHandler;
         }
 
         [HttpPost]
@@ -80,8 +84,20 @@ namespace alugueis_api.Controllers
         {
             Apto apto = await _AppDbContext.Aptos.FindAsync(codApto);
             if (apto == null) return NotFound();
+            List<int> idsDespesas = await _AppDbContext.DespesaRateios
+                .Include(dr => dr.Despesa)
+                    .ThenInclude(d => d.TipoDespesa)
+                .Where(dr => dr.CodApto == codApto)
+                .Where(dr => dr.Despesa.TipoDespesa.Compartilhado == 1)
+                .Select(dr => dr.CodDespesa)
+                .Distinct()
+                .ToListAsync();
             _AppDbContext.Aptos.Remove(apto);
             await _AppDbContext.SaveChangesAsync();
+            foreach (int id in idsDespesas)
+            {
+                await _RecalculationDespesaRateioHandler.Handle(id);
+            }
             return NoContent();
         }
 
