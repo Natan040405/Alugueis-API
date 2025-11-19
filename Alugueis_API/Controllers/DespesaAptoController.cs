@@ -16,12 +16,13 @@ namespace alugueis_api.Controllers
         private readonly UpdateDespesaAptoHandler _UpdateDespesaHandler;
         private readonly DeleteDespesaAptoHandler _DeleteDespesaAptoHandler;
         private readonly GetDespesaAptoHandler _GetDespesaAptoHandler;
-        private readonly AppDbContext _appDbContext;
 
-        public DespesaAptoController(AddDespesaAptoHandler addDespesaHandler, UpdateDespesaAptoHandler updateDespesaHandler, DeleteDespesaAptoHandler deleteDespesaAptoHandler,GetDespesaAptoHandler getDespesaAptoHandler , AppDbContext appDbContext)
+        public DespesaAptoController(AddDespesaAptoHandler addDespesaHandler,
+            UpdateDespesaAptoHandler updateDespesaHandler,
+            DeleteDespesaAptoHandler deleteDespesaAptoHandler,
+            GetDespesaAptoHandler getDespesaAptoHandler)
         {
             _AddDespesaAptoHandler = addDespesaHandler;
-            _appDbContext = appDbContext;
             _UpdateDespesaHandler = updateDespesaHandler;
             _DeleteDespesaAptoHandler = deleteDespesaAptoHandler;
             _GetDespesaAptoHandler= getDespesaAptoHandler;
